@@ -10,9 +10,7 @@ export default (await import('vue')).defineComponent({
 </script>
 
 <template>
-  <ContainerPrincipal>
-
-  </ContainerPrincipal>
+  <ContainerPrincipal />
 </template>
 
 <style scoped>
