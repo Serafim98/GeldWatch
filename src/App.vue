@@ -1,21 +1,22 @@
 <script>
 import Header from "./components/Header.vue";
-export default(await import('vue')).defineComponent({
+import MenuLateral from "./components/MenuLateral.vue";
+export default (await import('vue')).defineComponent({
   name: 'App',
   components: {
-    Header
+    Header, MenuLateral
   }
 })
 </script>
 
 <template>
+  <header>
     <Header />
-
+  </header>
   <main>
- 
+    <MenuLateral />
   </main>
 </template>
 
 <style scoped>
-
 </style>
