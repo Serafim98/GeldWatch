@@ -4,13 +4,24 @@ import axios from 'axios';
 export default createStore({
   state: {
     //colocar aqui as variáveis que serão acessadas em qualquer componente
+    moedas : []
   },
   mutations: {
     //aqui ficam as funções que modificam os valores que estão no state
+    setMoedas(state, response){
+      state.moedas.push(response);
+    }
   },
   actions: {
     requisicaoAPIMoedas({ commit}, data) {
-        console.log('entrou')
+      axios
+      .get("https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?%24format=json")
+      .then((res) => {
+          commit("setMoedas", res)
+      })
+      .catch((error) => {
+              console.log(error);
+      });
     },
     //EXEMPLO DE REQUISIÇÃO ABAIXO
     addTodo({ commit }, data) {

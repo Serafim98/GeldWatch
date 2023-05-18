@@ -3,13 +3,13 @@
     <header>
       <Header />
     </header>
-   
+
     <div class="columns">
       <div class="column is-4">
         <MenuLateral />
       </div>
       <div class="column is-auto">
-        <Section />
+        <SectionMoedas />
       </div>
     </div>
 
@@ -20,12 +20,17 @@
 <script>
 import Header from "./Header.vue";
 import MenuLateral from "./MenuLateral.vue";
-import Section from "./Section.vue";
-import { mapActions } from 'vuex'
+import SectionMoedas from "./SectionMoedas.vue";
+import { mapActions, mapState } from 'vuex'
 export default (await import('vue')).defineComponent({
   name: 'ContainerPrincipal',
   components: {
-    Header, MenuLateral, Section
+    Header, MenuLateral, SectionMoedas
+  },
+  computed:{
+    ...mapState({
+      moedas: (state) => state.moedas
+    }),
   },
   methods:{
     ...mapActions({
