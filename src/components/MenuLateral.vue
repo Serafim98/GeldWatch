@@ -12,21 +12,21 @@
             <p class="menu-label">Cotações</p>
             <ul class="menu-list">
                 <li>
-                    <a href="tables.html" class="has-icon">
+                    <a class="has-icon">
                         <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span>
-                        <span class="menu-item-label">Moedas</span>
+                        <span class="menu-item-label" @click="$emit('ShowMoedas')">Moedas</span>
                     </a>
                 </li>
                 <li>
-                    <a href="forms.html" class="has-icon">
+                    <a class="has-icon">
                         <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
-                        <span class="menu-item-label">Crypto</span>
+                        <span class="menu-item-label" @click="$emit('ShowCrypto')">Crypto</span>
                     </a>
                 </li>
                 <li>
-                    <a href="profile.html" class="has-icon">
+                    <a class="has-icon">
                         <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-                        <span class="menu-item-label">Títulos Financeiros</span>
+                        <span class="menu-item-label" @click="$emit('ShowTitulos')">Títulos Financeiros</span>
                     </a>
                 </li>
             </ul>
@@ -39,6 +39,7 @@
 
 export default {
     name: 'MenuLateral',
+    emits: ['ShowMoedas','ShowCrypto','ShowTitulos']
 
 }
 </script>

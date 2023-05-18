@@ -12,7 +12,27 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'SectionMoedas',
+  computed:{
+    ...mapState({
+      moedas: (state) => state.moedas
+    }),
+  },
+  methods:{
+    ...mapActions({
+      add: 'requisicaoAPIMoedas' // map `this.add()` to `this.$store.dispatch('increment')`
+    }),
+  },
+  async created(){
+    try {
+      await this.$store.dispatch('requisicaoAPIMoedas')
+      this.loading = false;
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 </script>

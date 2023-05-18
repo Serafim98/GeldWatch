@@ -6,10 +6,12 @@
 
     <div class="columns">
       <div class="column is-4">
-        <MenuLateral />
+        <MenuLateral @ShowMoedas="ShowMoedas" @ShowCrypto="ShowCrypto" @ShowTitulos="ShowTitulos"/>
       </div>
       <div class="column is-auto">
-        <SectionMoedas />
+        <SectionMoedas v-if="MostraMoedas"/>
+        <SectionCrypto v-if="MostraCrypto"/>
+        <SectionTitulo v-if="MostraTitulos"/>
       </div>
     </div>
 
@@ -21,29 +23,40 @@
 import Header from "./Header.vue";
 import MenuLateral from "./MenuLateral.vue";
 import SectionMoedas from "./SectionMoedas.vue";
-import { mapActions, mapState } from 'vuex'
-export default (await import('vue')).defineComponent({
+import SectionCrypto from "./SectionCrypto.vue";
+import SectionTitulo from "./SectionTitulo.vue";
+export default {
   name: 'ContainerPrincipal',
   components: {
-    Header, MenuLateral, SectionMoedas
-  },
-  computed:{
-    ...mapState({
-      moedas: (state) => state.moedas
-    }),
+    Header,
+    MenuLateral,
+    SectionMoedas,
+    SectionCrypto,
+    SectionTitulo
+},
+  data(){
+    return {
+      MostraMoedas: false,
+      MostraCrypto: false,
+      MostraTitulos: false
+    }
   },
   methods:{
-    ...mapActions({
-      add: 'requisicaoAPIMoedas' // map `this.add()` to `this.$store.dispatch('increment')`
-    }),
-  },
-  async created(){
-    try {
-      await this.$store.dispatch('requisicaoAPIMoedas')
-      this.loading = false;
-    } catch (error) {
-      console.log(error)
+    ShowMoedas() {
+      this.MostraMoedas = true,
+      this.MostraCrypto = false,
+      this.MostraTitulos = false
+    },
+    ShowCrypto() {
+      this.MostraCrypto = true,
+      this.MostraMoedas = false,
+      this.MostraTitulos = false
+    },
+    ShowTitulos() {
+      this.MostraTitulos = true,
+      this.MostraMoedas = false,
+      this.MostraCrypto = false
     }
   }
-})
+}
 </script>
