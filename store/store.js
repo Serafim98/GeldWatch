@@ -5,7 +5,9 @@ export default createStore({
   state: {
     //colocar aqui as variáveis que serão acessadas em qualquer componente
     moedas: [],
-    valoresMoedas: []
+    valoresMoedas: [],
+    cripto: [],
+    titulos: []
   },
   mutations: {
     //aqui ficam as funções que modificam os valores que estão no state
@@ -14,6 +16,12 @@ export default createStore({
     },
     setValorMoeda(state, response){
       state.valoresMoedas.push(response);
+    },
+    setCripto(state, response){
+      state.cripto.push(response)
+    },
+    setTitulos(state, response){
+      state.titulos.push(response)
     }
   },
   actions: {
@@ -47,6 +55,30 @@ export default createStore({
         .then((res) => {
           // console.log(res.data.value[4].cotacaoCompra);
           // commit("setValorMoeda", res.data.value[4].cotacaoCompra);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    requisicaoCripto({ commit }) {
+      axios
+        .get(
+          "https://www.mercadodobitcoin.net/api/btc/get" //moeda/method
+        )
+        .then((res) => {
+          commit("setCripto", res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    requisicaoTitulo({ commit }, data) {
+      axios
+        .get(
+          "https://api.anbima.com.br/feed/precos-indices/v1/titulos-publicos/mercado-secundario-TPF?data=" +data 
+        )
+        .then((res) => {
+          commit("setTitulo", res);
         })
         .catch((error) => {
           console.log(error);

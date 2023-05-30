@@ -4,7 +4,7 @@
     <h2 class="subtitle">
       Section Simples pra ficar bonitin.
     </h2>
-    <!-- <pre>{{ valoresMoedas }}</pre> -->            
+    <pre>{{ valoresMoedas }}</pre>            
 
     <ul>
       <li v-for="moeda, index in moedas" :key="moeda.simbolo">
@@ -40,14 +40,14 @@ export default {
     }),
   },
   methods: {
-    // mandaValor(simbolo){
-    //   try {
-    //    his.$store.dispatch('requisicaoValorMoeda', simbolo)
-    //   this.loading = false;
-    // } catch (error) {
-    //   console.log(error)   
-    // }
-    // }
+    mandaValor(simbolo){
+      try {
+       his.$store.dispatch('requisicaoValorMoeda', simbolo)
+      this.loading = false;
+    } catch (error) {
+      console.log(error)   
+    }
+    }
 
   },
   async created() {
@@ -57,16 +57,16 @@ export default {
     } catch (error) {
       console.log(error)
     }
-    // this.moedas.forEach(moeda => {
-    //   try {
-    //   this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
-    //   this.loading = false;
-    // } catch (error) {
-    //   console.log(error)
+    this.moedas.forEach(moeda => {
+      try {
+      this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
+      this.loading = false;
+    } catch (error) {
+      console.log(error)
       
-    // }
+    }
       
-    // });
+    });
     
   }
 }
