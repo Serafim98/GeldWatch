@@ -14,7 +14,7 @@ export default createStore({
     setMoedas(state, response) {
       state.moedas.push(response);
     },
-    setValorMoeda(state, response){
+    setValorMoedas(state, response){
       state.valoresMoedas.push(response);
     },
     setCripto(state, response){
@@ -53,8 +53,9 @@ export default createStore({
             "'&%24format=json"
         )
         .then((res) => {
+          // console.log(moeda+": "+ res.data.value[4].cotacaoCompra);
           // console.log(res.data.value[4].cotacaoCompra);
-          // commit("setValorMoeda", res.data.value[4].cotacaoCompra);
+          commit("setValorMoedas", res.data.value[4].cotacaoCompra);
         })
         .catch((error) => {
           console.log(error);

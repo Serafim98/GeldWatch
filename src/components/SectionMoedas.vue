@@ -3,8 +3,7 @@
     <h1 class="title">Título da Section</h1>
     <h2 class="subtitle">
       Section Simples pra ficar bonitin.
-    </h2>
-    <pre>{{ valoresMoedas }}</pre>            
+    </h2>           
 
     <ul>
       <li v-for="moeda, index in moedas" :key="moeda.simbolo">
@@ -14,10 +13,7 @@
               {{ moeda.nomeFormatado }}
             </p>
             <p class="subtitle">
-              {{ moeda.simbolo }}
-            </p>
-            <p class="subtitle" >
-              {{ valoresMoedas[index] }}
+              {{ moeda.simbolo }} {{ valoresMoedas[index] }}
             </p>
           </div>
         </div>
@@ -40,14 +36,6 @@ export default {
     }),
   },
   methods: {
-    mandaValor(simbolo){
-      try {
-       his.$store.dispatch('requisicaoValorMoeda', simbolo)
-      this.loading = false;
-    } catch (error) {
-      console.log(error)   
-    }
-    }
 
   },
   async created() {
@@ -57,17 +45,16 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  mounted(){
     this.moedas.forEach(moeda => {
       try {
-      this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
-      this.loading = false;
-    } catch (error) {
-      console.log(error)
-      
-    }
-      
+        this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
+        this.loading = false;
+      } catch (error) {
+        console.log(error)
+      }
     });
-    
   }
 }
 </script>
