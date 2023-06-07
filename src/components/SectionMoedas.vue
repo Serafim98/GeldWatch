@@ -1,8 +1,8 @@
 <template>
   <section class="section">
-    <h1 class="title">Título da Section</h1>
+    <h1 class="title">Moedas</h1>
     <h2 class="subtitle">
-      Section Simples pra ficar bonitin.
+      Valores de compra no dia atual
     </h2>           
 
     <ul>

@@ -53,20 +53,19 @@ export default createStore({
             "'&%24format=json"
         )
         .then((res) => {
-          // console.log(moeda+": "+ res.data.value[4].cotacaoCompra);
-          // console.log(res.data.value[4].cotacaoCompra);
           commit("setValorMoedas", res.data.value[4].cotacaoCompra);
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    requisicaoCripto({ commit }) {
+    requisicaoCripto({ commit }, moeda) {
       axios
         .get(
-          "https://www.mercadodobitcoin.net/api/btc/get" //moeda/method
+          "https://www.mercadobitcoin.net/api/"+ moeda +"/ticker/" //moeda/method
         )
         .then((res) => {
+          res.nome = moeda;
           commit("setCripto", res);
         })
         .catch((error) => {
