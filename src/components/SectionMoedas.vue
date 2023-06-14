@@ -2,7 +2,7 @@
   <section class="section">
     <h1 class="title">Moedas</h1>
     <h2 class="subtitle">
-      Valores de compra no dia atual
+      Valores de compra no dia atual em relação ao Real (BRL)
     </h2>           
 
     <ul>
@@ -31,8 +31,8 @@ export default {
   name: 'SectionMoedas',
   computed: {
     ...mapState({
-      moedas: (state) => state.moedas[0].data.value,
-      valoresMoedas: (state) => state.valoresMoedas
+      moedas: (state) => (state.moedas.length > 0 ? state.moedas[0].data.value : []),
+      valoresMoedas: (state) => (state.valoresMoedas ? state.valoresMoedas : [])
     }),
   },
   methods: {
@@ -47,14 +47,17 @@ export default {
     }
   },
   mounted(){
-    this.moedas.forEach(moeda => {
-      try {
-        this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
-        this.loading = false;
-      } catch (error) {
-        console.log(error)
-      }
-    });
+    setTimeout(() => {
+      this.moedas.forEach(moeda => {
+        try {
+          this.$store.dispatch('requisicaoValorMoeda', moeda.simbolo)
+          this.loading = false;
+        } catch (error) {
+          console.log(error)
+        }
+      });
+    }, 1000)
+  
   }
 }
 </script>

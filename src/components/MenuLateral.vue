@@ -5,7 +5,7 @@
                 <li>
                     <a href="index.html" class="is-active router-link-active has-icon">
                         <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-                        <span class="menu-item-label"><span>GeldWatch</span></span>
+                        <span class="menu-item-label" @click="$emit('ShowHome')"><span>GeldWatch</span></span>
                     </a>
                 </li>
             </ul>
@@ -26,7 +26,7 @@
                 <li>
                     <a class="has-icon">
                         <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-                        <span class="menu-item-label" @click="$emit('ShowTitulos')">Títulos Financeiros</span>
+                        <span class="menu-item-label" @click="$emit('ShowTitulos')">Selic</span>
                     </a>
                 </li>
             </ul>
@@ -39,7 +39,7 @@
 
 export default {
     name: 'MenuLateral',
-    emits: ['ShowMoedas','ShowCrypto','ShowTitulos']
+    emits: ['ShowMoedas','ShowCrypto','ShowTitulos', 'ShowHome']
 
 }
 </script>

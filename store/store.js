@@ -20,8 +20,8 @@ export default createStore({
     setCripto(state, response){
       state.cripto.push(response)
     },
-    setTitulos(state, response){
-      state.titulos.push(response)
+    setSelic(state, response){
+      state.selic = (response.data.value)
     }
   },
   actions: {
@@ -44,16 +44,17 @@ export default createStore({
       const ano = hoje.getFullYear();
 
       const dataAtual = `${mes}-${dia}-${ano}`;
+      const url = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?%40moeda='"
+      + moeda + "'&%40dataCotacao='" + dataAtual + "'&%24format=json";
+
       axios
-        .get(
-          "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaDia(moeda=@moeda,dataCotacao=@dataCotacao)?%40moeda='" +
-            moeda +
-            "'&%40dataCotacao='" +
-            dataAtual +
-            "'&%24format=json"
-        )
+        .get(url)
         .then((res) => {
-          commit("setValorMoedas", res.data.value[4].cotacaoCompra);
+          if(res.data.value.length != 0)
+            commit("setValorMoedas", res.data.value[4].cotacaoCompra);
+          else{
+            commit("setValorMoedas", '(API Indisponível)');
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -72,18 +73,18 @@ export default createStore({
           console.log(error);
         });
     },
-    requisicaoTitulo({ commit }, data) {
+    requisicaoSelic({ commit }) {
       axios
         .get(
-          "https://api.anbima.com.br/feed/precos-indices/v1/titulos-publicos/mercado-secundario-TPF?data=" +data 
+          "http://ipeadata.gov.br/api/odata4/ValoresSerie(SERCODIGO='PAN12_TJOVER12')"
         )
         .then((res) => {
-          commit("setTitulo", res);
+          commit("setSelic", res);
         })
         .catch((error) => {
           console.log(error);
         });
-    },
+    }
   },
   getters: {
     //aqui ficarão funç~pes que pegam os dados direto do state e mandam de maneira diferente para o
