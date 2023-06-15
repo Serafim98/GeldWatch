@@ -1,12 +1,12 @@
 <script>
 import ContainerPrincipal from "./components/ContainerPrincipal.vue";
 
-export default (await import('vue')).defineComponent({
+export default{
   name: 'App',
   components: {
     ContainerPrincipal
+  }
 }
-})
 </script>
 
 <template>

@@ -31,7 +31,7 @@ export default {
   methods: {
 
   },
-  async created() {
+  created() {
     try {
       var arrayNomeMoedas = ['BTC', 'DOGE', 'ETH', 'MBVASCO01', 'SHIB'];
       const promises = [];
