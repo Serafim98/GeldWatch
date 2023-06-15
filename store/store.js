@@ -21,7 +21,7 @@ export default createStore({
       state.cripto.push(response)
     },
     setSelic(state, response){
-      state.selic = (response.data.value)
+      state.selic = (response.data)
     }
   },
   actions: {
@@ -76,7 +76,7 @@ export default createStore({
     requisicaoSelic({ commit }) {
       axios
         .get(
-          "http://ipeadata.gov.br/api/odata4/ValoresSerie(SERCODIGO='PAN12_TJOVER12')"
+          "https://api.bcb.gov.br/dados/serie/bcdata.sgs.11/dados/ultimos/10?formato=json"
         )
         .then((res) => {
           commit("setSelic", res);

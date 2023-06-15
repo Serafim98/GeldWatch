@@ -1,18 +1,18 @@
 <template>
   <div>
     <header>
-      <Header />
+      <Header @ShowHome="ShowHome"/>
     </header>
 
     <div class="columns">
       <div class="column is-4">
-        <MenuLateral @ShowMoedas="ShowMoedas" @ShowCrypto="ShowCrypto" @ShowTitulos="ShowTitulos" @ShowHome="ShowHome" />
+        <MenuLateral @ShowMoedas="ShowMoedas" @ShowCrypto="ShowCrypto" @ShowTitulos="ShowTitulos" />
       </div>
       <div class="column is-auto">
         <SectionMoedas v-if="MostraMoedas" />
         <SectionCrypto v-if="MostraCrypto" />
         <SectionTitulo v-if="MostraTitulos" />
-        <Home v-if="MostraHome" />
+        <Home v-if="MostraHome"/>
       </div>
     </div>
 

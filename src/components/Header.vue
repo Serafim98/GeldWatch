@@ -14,7 +14,7 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="navbar-item">
+              <a class="navbar-item" @click="$emit('ShowHome')">
                 Home
               </a>
               <a class="navbar-item">
@@ -33,5 +33,6 @@
 
 export default {
   name: 'Header',
+  emits: ['ShowHome']
 }
 </script>

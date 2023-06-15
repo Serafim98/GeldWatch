@@ -3,7 +3,7 @@
     <h1 class="title">Moedas</h1>
     <h2 class="subtitle">
       Valores de compra no dia atual em relação ao Real (BRL)
-    </h2>           
+    </h2>
 
     <ul>
       <li v-for="moeda, index in moedas" :key="moeda.simbolo">
@@ -46,7 +46,7 @@ export default {
       console.log(error)
     }
   },
-  mounted(){
+  mounted() {
     setTimeout(() => {
       this.moedas.forEach(moeda => {
         try {
@@ -57,7 +57,7 @@ export default {
         }
       });
     }, 1000)
-  
+
   }
 }
 </script>

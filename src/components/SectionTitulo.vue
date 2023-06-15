@@ -2,18 +2,18 @@
   <section class="section">
     <h1 class="title">Selic</h1>
     <h2 class="subtitle">
-      Valores de compra no dia atual em relação ao Real (BRL)
-    </h2>           
-        <div class="card">
-          <div class="card-content">
-            <p class="title">
-              {{ ValData }}
-            </p>
-            <p class="subtitle">
-              {{ ValValor }}
-            </p>
-          </div>
-        </div>
+      Valores de compra no mês atual em relação ao Real (BRL)
+    </h2>
+    <div class="card">
+      <div class="card-content">
+        <p class="title">
+          Data: {{ ValData(selic) }}
+        </p>
+        <p class="subtitle">
+          Porcentagem: {{ ValValor(selic) }} %
+        </p>
+      </div>
+    </div>
 
   </section>
 </template>
@@ -27,17 +27,20 @@ export default {
     ...mapState({
       selic: (state) => state.selic
     }),
-
-    ValData(){
-      return this.selic[this.selic.length - 1].VALDATA
-    },
-
-    ValValor(){
-      return this.selic[this.selic.length - 1].VALVALOR
-    }
   },
   methods: {
-
+    ValData(selic) {
+      if (typeof (selic) !== 'undefined') {
+        const dataHora = selic[selic.length - 1].data
+        return dataHora
+      }
+    },
+    ValValor(selic) {
+      if (typeof (selic) !== 'undefined') {
+        const porcentagem = selic[selic.length - 1].valor;
+        return ((porcentagem)*100).toFixed(2);
+      }
+    }
   },
   async created() {
     try {
@@ -47,9 +50,5 @@ export default {
       console.log(error)
     }
   },
-  mounted(){
-
-  
-  }
 }
 </script>

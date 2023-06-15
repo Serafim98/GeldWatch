@@ -10,6 +10,8 @@
           <div class="card-content">
             <p class="title">
               {{ moeda.nome }}
+            </p>
+            <p class="subtitle">
               {{ moeda.data.ticker.last }}
             </p>
           </div>
